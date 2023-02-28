@@ -8,7 +8,7 @@ public class Ball {
     private int y;
     private Rectangle hitbox;
     
-    private int slopex,slopey;
+    private double slopex,slopey;
     
     public int getX() {return x;}
 
@@ -24,21 +24,30 @@ public class Ball {
 
     public void setWidth(int width) {this.width = width;}
 
-    public int getVx() {return slopex;}
+    public double getVx() {return slopex;}
 
-    public void setVx(int vx) {this.slopex = vx;}
+    public void setVx(double vx) {this.slopex = vx;}
 
-    public int getVy() {return slopey;}
+    public double getVy() {return slopey;}
 
-    public void setVy(int vy) {this.slopey = vy;}
+    public void setVy(double vy) {this.slopey = vy;}
 
     public Color getColor() {return color;}
     
     public Rectangle getHitbox() {return hitbox;}
+    
+    public void setVelocity(int vel) {velocity = vel;}
+    public int getVelocity() {return velocity;}
+    
+    public double getAngle() {return angle;}
+    public void setAngle(double angle) {this.angle = angle;}
 
     private int width; //size variable
     private Color color; //color
     private int velocity;
+    private double angle = 0;
+    private double radians;
+    
     
     // # - parts of a class - constructor
     // helps with creation of class
@@ -62,18 +71,22 @@ public class Ball {
         width = newWidth;
         //also randomize the colors
         hitbox = new Rectangle(x,y,width,width);
-        slopex = 0;
-        slopey = -1;
-        velocity = 100;
+        radians = 0;
+        velocity = 0;
+        angle = -90;
     }
     
     //add a method to the ball that allows it to paint itself
     public void paint(Graphics g) {
+        radians = (angle*(Math.PI/180));
+        //System.out.println(radians);
         
+        slopex = Math.cos(radians);
+        slopey = Math.sin(radians);
         //update velocity
-    	if (velocity > 0) {velocity--;}
-        x += (slopex*velocity)/10;
-        y += (slopey*velocity)/10;
+    	if (velocity > 0) {velocity-=0.1;}
+        x += (slopex*velocity*10)/10;
+        y += (slopey*velocity*10)/10;
         
         //set the color
         hitbox.setLocation(x,y);

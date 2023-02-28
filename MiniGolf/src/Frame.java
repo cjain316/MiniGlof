@@ -18,8 +18,9 @@ import javax.swing.Timer;
 
 public class Frame extends JPanel implements KeyListener, ActionListener{
     private Image Sprite = null;
+    private int tempvel = 0;
     private AffineTransform tx;
-    private Level level1 = new Level(960,700,970,400);
+    private Level level1 = new Level(960,700,980,230);
     /* paint is getting called roughly 144x per second */
     public void paint(Graphics g) {
         super.paintComponent(g);
@@ -29,6 +30,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
         g.fillRect(0, 0, 1920, 1080);
         
         level1.paint(g);
+        g.fillRect(30,800,tempvel*10,50);
 	}
 
     
@@ -40,7 +42,23 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
     
     @Override
     public void keyPressed(KeyEvent arg) {
-    	//System.out.println(arg.getExtendedKeyCode());
+    	System.out.println(arg.getExtendedKeyCode());
+    	if (arg.getExtendedKeyCode() == 87) {
+    		tempvel += 1;
+    	}
+    	if (arg.getExtendedKeyCode() == 83) {
+    		tempvel -= 1;
+    	}
+    	if (arg.getExtendedKeyCode() == 65) {
+    		level1.getBall().setAngle(level1.getBall().getAngle()-10);
+    	}
+    	if (arg.getExtendedKeyCode() == 68) {
+    		level1.getBall().setAngle(level1.getBall().getAngle()+10);
+    	}
+    	if (arg.getExtendedKeyCode() == 32) {
+    		level1.getBall().setVelocity(tempvel);
+    		tempvel = 0;
+    	}
     }
 
     @Override
@@ -97,6 +115,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
         } catch (Exception e) {e.printStackTrace();}
         return tempImage;
     }
+    
     
 }
 
