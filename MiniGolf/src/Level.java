@@ -19,13 +19,15 @@ public class Level {
 		for (int i = 0; i < walls.size();i++) {
 			if (timer == 0) {
 				if (colliding(ball,walls.get(i))) {
+					//ball.setVelocity(ball.getVelocity()+5);
 					if (walls.get(i).getHorizontal()) {
-						ball.setAngle(ball.getAngle()-180+(ball.getAngle()/Math.PI));
-						timer = 10;
+						ball.setAngle(ball.getAngle()*-1);
+						timer = 2;
 					}
 					if (!walls.get(i).getHorizontal()) {
-						
-						timer = 10;
+						if (Math.cos(ball.getRadians()) > 0) {ball.setAngle(ball.getAngle()-90);}
+						if (Math.cos(ball.getRadians()) < 0) {ball.setAngle(ball.getAngle()+90);}
+						timer = 2;
 					}
 				}
 				

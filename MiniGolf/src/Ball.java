@@ -41,6 +41,8 @@ public class Ball {
     
     public double getAngle() {return angle;}
     public void setAngle(double angle) {this.angle = angle;}
+    
+    public double getRadians() {return radians;}
 
     private int width; //size variable
     private Color color; //color

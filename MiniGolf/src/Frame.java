@@ -44,10 +44,14 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
     public void keyPressed(KeyEvent arg) {
     	System.out.println(arg.getExtendedKeyCode());
     	if (arg.getExtendedKeyCode() == 87) {
-    		tempvel += 1;
+    		if (tempvel < 40) {
+    			tempvel += 1;
+    		}
     	}
     	if (arg.getExtendedKeyCode() == 83) {
-    		tempvel -= 1;
+    		if (tempvel > 0) {
+    			tempvel -= 1;
+    		}
     	}
     	if (arg.getExtendedKeyCode() == 65) {
     		level1.getBall().setAngle(level1.getBall().getAngle()-10);
