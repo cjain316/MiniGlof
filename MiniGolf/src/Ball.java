@@ -36,8 +36,8 @@ public class Ball {
     
     public Rectangle getHitbox() {return hitbox;}
     
-    public void setVelocity(int vel) {velocity = vel;}
-    public int getVelocity() {return velocity;}
+    public void setVelocity(double vel) {velocity = vel;}
+    public double getVelocity() {return velocity;}
     
     public double getAngle() {return angle;}
     public void setAngle(double angle) {this.angle = angle;}
@@ -46,7 +46,7 @@ public class Ball {
 
     private int width; //size variable
     private Color color; //color
-    private int velocity;
+    private double velocity;
     private double angle = 0;
     private double radians;
     
@@ -86,7 +86,7 @@ public class Ball {
         slopex = Math.cos(radians);
         slopey = Math.sin(radians);
         //update velocity
-    	if (velocity > 0) {velocity-=0.1;}
+    	if (velocity > 0) {velocity-=0.5;}
         x += (slopex*velocity*10)/10;
         y += (slopey*velocity*10)/10;
         

@@ -19,15 +19,17 @@ public class Level {
 		for (int i = 0; i < walls.size();i++) {
 			if (timer == 0) {
 				if (colliding(ball,walls.get(i))) {
-					//ball.setVelocity(ball.getVelocity()+5);
+					ball.setVelocity(ball.getVelocity()+1);
 					if (walls.get(i).getHorizontal()) {
 						ball.setAngle(ball.getAngle()*-1);
-						timer = 2;
+						timer = 3;
 					}
-					if (!walls.get(i).getHorizontal()) {
-						if (Math.cos(ball.getRadians()) > 0) {ball.setAngle(ball.getAngle()-90);}
-						if (Math.cos(ball.getRadians()) < 0) {ball.setAngle(ball.getAngle()+90);}
-						timer = 2;
+					if (timer == 0) {
+						if (!walls.get(i).getHorizontal()) {
+							if (Math.cos(ball.getAngle()) > -90) {ball.setAngle(ball.getAngle()-(180-Math.abs(ball.getAngle()*2)));}
+							if (Math.cos(ball.getAngle()) < -90) {ball.setAngle(ball.getAngle()+(180-Math.abs(ball.getAngle()*2)));}
+							timer = 3;
+						}
 					}
 				}
 				
@@ -38,7 +40,7 @@ public class Level {
 		if (!colliding(ball,hole)) {
 			ball.paint(g);
 			g.drawLine(ball.getX()+15,ball.getY()+15,15+(int)ball.getX() + (int)(ball.getVx()*200),15+(int)ball.getY() + (int)(ball.getVy()*200));
-			g.fillRect(30,30,ball.getVelocity()*10,50);
+			g.fillRect(30,30,(int)ball.getVelocity()*10,50);
 		} else {
 			complete = true;
 		}

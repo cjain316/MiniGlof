@@ -29,7 +29,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
     public void paint(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        if (levels[level].getCompleted()) {level++;}
+        if (levels[level].getCompleted() && !(level+1 >= levels.length)) {level++;}
         
         g.setColor(new Color(207, 255, 189));
         g.fillRect(0, 0, 1920, 1080);
@@ -52,7 +52,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
     
     @Override
     public void keyPressed(KeyEvent arg) {
-    	System.out.println(arg.getExtendedKeyCode());
+    	//System.out.println(arg.getExtendedKeyCode());
     	if (arg.getExtendedKeyCode() == 87) {
     		if (tempvel < 40) {
     			tempvel += 1;
@@ -108,7 +108,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
     	levels[1].addWall(new Wall(200,200,100,800));
     	levels[1].addWall(new Wall(200,900,500,100));
     	levels[1].addWall(new Wall(600,600,100,300));
-    	levels[1].addWall(new Wall(600,600,900,100));
+    	levels[1].addWall(new Wall(600,599,900,100));
     	levels[1].addWall(new Wall(1500,200,100,500));
     	
         JFrame f = new JFrame("Mini Golf");
