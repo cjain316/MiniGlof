@@ -5,6 +5,7 @@ public class Level {
 	private ArrayList<Wall> walls = new ArrayList<Wall>();
 	private int startingx,startingy;
 	private int holex,holey;
+	private boolean complete;
 	Ball ball;
 	Hole hole;
 	private int timer = 0;
@@ -14,7 +15,6 @@ public class Level {
 		for (int i = 0; i < walls.size();i++) {
 			walls.get(i).paint(g);
 		}
-		ball.paint(g);
 		hole.paint(g);
 		for (int i = 0; i < walls.size();i++) {
 			if (timer == 0) {
@@ -35,8 +35,13 @@ public class Level {
 			
 		}
 		hole.paint(g);
-		g.drawLine(ball.getX()+15,ball.getY()+15,15+(int)ball.getX() + (int)(ball.getVx()*200),15+(int)ball.getY() + (int)(ball.getVy()*200));
-		g.fillRect(30,800,ball.getVelocity()*10,50);
+		if (!colliding(ball,hole)) {
+			ball.paint(g);
+			g.drawLine(ball.getX()+15,ball.getY()+15,15+(int)ball.getX() + (int)(ball.getVx()*200),15+(int)ball.getY() + (int)(ball.getVy()*200));
+			g.fillRect(30,30,ball.getVelocity()*10,50);
+		} else {
+			complete = true;
+		}
 		
 		
 	}
@@ -64,5 +69,6 @@ public class Level {
     }
     
     public Ball getBall() {return ball;}
+    public boolean getCompleted() {return complete;}
 	
 }

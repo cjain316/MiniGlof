@@ -20,19 +20,29 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
     private Image Sprite = null;
     private int tempvel = 0;
     private AffineTransform tx;
-    private Level level1 = new Level(960,700,980,230);
+    private int level = 0;
+    private Level[] levels = {
+    		new Level(1000,700,980,230),
+    		new Level(420,700,1400,430),
+    };
     /* paint is getting called roughly 144x per second */
     public void paint(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        if (levels[level].getCompleted()) {level++;}
         
         g.setColor(new Color(207, 255, 189));
         g.fillRect(0, 0, 1920, 1080);
         
-        level1.paint(g);
-        g.fillRect(30,800,tempvel*10,50);
+        levels[level].paint(g);
+        g.setColor(new Color(tempvel*4,240-tempvel*6,0));
+        g.fillRect(30,30,tempvel*10,50);
+        
+        tx = AffineTransform.getTranslateInstance(30, 30);
+		Sprite = getImage("resources\\power bar.png");
+		g2.drawImage(Sprite, tx, null);
 	}
-
+    
     
     
     public static void main(String[] arg) {
@@ -54,13 +64,13 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
     		}
     	}
     	if (arg.getExtendedKeyCode() == 65) {
-    		level1.getBall().setAngle(level1.getBall().getAngle()-10);
+    		levels[level].getBall().setAngle(levels[level].getBall().getAngle()-10);
     	}
     	if (arg.getExtendedKeyCode() == 68) {
-    		level1.getBall().setAngle(level1.getBall().getAngle()+10);
+    		levels[level].getBall().setAngle(levels[level].getBall().getAngle()+10);
     	}
     	if (arg.getExtendedKeyCode() == 32) {
-    		level1.getBall().setVelocity(tempvel);
+    		levels[level].getBall().setVelocity(tempvel);
     		tempvel = 0;
     	}
     }
@@ -89,10 +99,17 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
     Timer t;
     
     public Frame() {
-    	level1.addWall(new Wall(1200,200,100,700));
-    	level1.addWall(new Wall(720,200,100,700));
-    	level1.addWall(new Wall(720,100,580,100));
-    	level1.addWall(new Wall(720,900,580,100));
+    	levels[0].addWall(new Wall(1200,200,100,700));
+    	levels[0].addWall(new Wall(720,200,100,700));
+    	levels[0].addWall(new Wall(720,100,580,100));
+    	levels[0].addWall(new Wall(720,900,580,100));
+    	
+    	levels[1].addWall(new Wall(200,200,1300,100));
+    	levels[1].addWall(new Wall(200,200,100,800));
+    	levels[1].addWall(new Wall(200,900,500,100));
+    	levels[1].addWall(new Wall(600,600,100,300));
+    	levels[1].addWall(new Wall(600,600,900,100));
+    	levels[1].addWall(new Wall(1500,200,100,500));
     	
         JFrame f = new JFrame("Mini Golf");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
