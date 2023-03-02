@@ -67,7 +67,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
     		levels[level].getBall().setAngle(levels[level].getBall().getAngle()-10);
     	}
     	if (arg.getExtendedKeyCode() == 68) {
-    		levels[level].getBall().setAngle(levels[level].getBall().getAngle()+10);
+    		if (levels[level].getBall().getAngle() == 0) {levels[level].getBall().setAngle(-350);}
+    		else {levels[level].getBall().setAngle(levels[level].getBall().getAngle()+10);}
     	}
     	if (arg.getExtendedKeyCode() == 32) {
     		levels[level].getBall().setVelocity(tempvel);

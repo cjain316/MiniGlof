@@ -9,32 +9,39 @@ public class Level {
 	Ball ball;
 	Hole hole;
 	private int timer = 0;
+	private boolean skipframe = false;
+	ArrayList<Integer> indexes = new ArrayList<Integer>();
 
 	public void paint(Graphics g) {
+		boolean done = false;
+		//Timer decrement
 		if (timer > 0) {timer--;}
-		for (int i = 0; i < walls.size();i++) {
-			walls.get(i).paint(g);
-		}
+		
+		//painting walls
+		for (int i = 0; i < walls.size();i++) {walls.get(i).paint(g);}
 		hole.paint(g);
+		
+		//Collision detection
 		for (int i = 0; i < walls.size();i++) {
-			if (timer == 0) {
-				if (colliding(ball,walls.get(i))) {
-					ball.setVelocity(ball.getVelocity()+1);
-					if (walls.get(i).getHorizontal()) {
-						ball.setAngle(ball.getAngle()*-1);
-						timer = 3;
-					}
-					if (timer == 0) {
-						if (!walls.get(i).getHorizontal()) {
-							if (Math.cos(ball.getAngle()) > -90) {ball.setAngle(ball.getAngle()-(180-Math.abs(ball.getAngle()*2)));}
-							if (Math.cos(ball.getAngle()) < -90) {ball.setAngle(ball.getAngle()+(180-Math.abs(ball.getAngle()*2)));}
-							timer = 3;
-						}
-					}
+			if (colliding(ball,walls.get(i)) && !in(i)) {
+				System.out.println("Cosine:" + Math.cos(Math.abs(ball.getAngle())));
+				System.out.println("Sin:" + Math.sin(Math.abs(ball.getAngle())));
+				ball.setVelocity(ball.getVelocity()+0.5);
+				indexes.add(i);
+				//ricochet
+				if (walls.get(i).getHorizontal()) {ball.setAngle(180-(ball.getAngle()));} 
+				if (!walls.get(i).getHorizontal()) {
+					//first (0 - -90) -90
+					//second (-90,-180) +90
+					//third (-180,-270) -90
+					//fourth (-270,-360) +90
+					if (Math.cos(Math.abs(ball.getAngle())) > 0 && Math.sin(Math.abs(ball.getAngle())) > 0 && !done) {ball.setAngle(ball.getAngle()+90); done = true;}
+					if (Math.cos(Math.abs(ball.getAngle())) < 0 && Math.sin(Math.abs(ball.getAngle())) > 0 && !done) {ball.setAngle(ball.getAngle()-90); done = true;}
+					if (Math.cos(Math.abs(ball.getAngle())) < 0 && Math.sin(Math.abs(ball.getAngle())) < 0 && !done) {ball.setAngle(ball.getAngle()+90); done = true;}
+					if (Math.cos(Math.abs(ball.getAngle())) > 0 && Math.sin(Math.abs(ball.getAngle())) < 0 && !done) {ball.setAngle(ball.getAngle()-90); done = true;}
+					done = false;
 				}
-				
 			}
-			
 		}
 		hole.paint(g);
 		if (!colliding(ball,hole)) {
@@ -45,7 +52,8 @@ public class Level {
 			complete = true;
 		}
 		
-		
+		for (int b = 0; b < walls.size();b++) {if (!colliding(ball,walls.get(b))) {if (getIndexOf(indexes,b) != -1) {
+			indexes.remove(getIndexOf(indexes,b));}}}
 	}
 	
 	public void addWall(Wall w) {
@@ -72,5 +80,22 @@ public class Level {
     
     public Ball getBall() {return ball;}
     public boolean getCompleted() {return complete;}
+    
+    private void clearArray(ArrayList<Integer> a) {
+    for (int i = 0; i < a.size(); i++) {a.remove(i);}}
+    
+    private int getIndexOf(ArrayList<Integer> a, int value) {
+    	for (int i = 0; i < a.size(); i++) {
+    		if (a.get(i) == value) {return i;}
+    	}
+    	return -1;
+    }
+    
+    private boolean in(int i) {
+    	for (int a = 0; a < indexes.size();a++) {
+			if (i == indexes.get(a)) {return true;}
+    	}
+    	return false;
+    }
 	
 }
