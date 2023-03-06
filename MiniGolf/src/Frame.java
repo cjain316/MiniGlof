@@ -41,6 +41,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
         SwingUtilities.convertPointFromScreen(point, getFocusCycleRootAncestor());
         point.setLocation(point.getX()-7,point.getY()-31);
         
+        levels[level].getBall().setAngle(calculateAngle(levels[level].getBall(),point));
+        
         if (levels[level].getCompleted() && !(level+1 >= levels.length)) {level++;}
         
         g.setColor(new Color(207, 255, 189));
@@ -187,10 +189,25 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		 
 	}
 	
 	public int calculateAngle(Ball b, Point cursor) {
+		int x_dist = (int) Math.abs(b.getX()+b.getWidth()/2 - cursor.getX());
+		int y_dist = (int) Math.abs(b.getY()+b.getWidth()/2 - cursor.getY());
+		
+		if (x_dist == 0) {
+			return 0;
+		}
+		double result = Math.atan(y_dist/x_dist);
+		
+		if (x_dist > 0) {
+			if (y_dist > 0) return (int)(Math.toDegrees(result)); // Quadrant 1
+			else return 360-(int)(Math.toDegrees(result)); // Quadrant 4
+		} else {
+			if (y_dist > 0) return 180-(int)(Math.toDegrees(result)); // Quadrant 2
+			else return 270 - (int)(Math.toDegrees(result)); // Quadrant 3
+		}
 		
 	}
     
