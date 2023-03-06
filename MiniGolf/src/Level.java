@@ -35,10 +35,7 @@ public class Level {
 					//second (-90,-180) +90
 					//third (-180,-270) -90
 					//fourth (-270,-360) +90
-					if (Math.cos(Math.abs(ball.getAngle())) > 0 && Math.sin(Math.abs(ball.getAngle())) > 0 && !done) {ball.setAngle(ball.getAngle()+90); done = true;}
-					if (Math.cos(Math.abs(ball.getAngle())) < 0 && Math.sin(Math.abs(ball.getAngle())) > 0 && !done) {ball.setAngle(ball.getAngle()-90); done = true;}
-					if (Math.cos(Math.abs(ball.getAngle())) < 0 && Math.sin(Math.abs(ball.getAngle())) < 0 && !done) {ball.setAngle(ball.getAngle()+90); done = true;}
-					if (Math.cos(Math.abs(ball.getAngle())) > 0 && Math.sin(Math.abs(ball.getAngle())) < 0 && !done) {ball.setAngle(ball.getAngle()-90); done = true;}
+					
 					done = false;
 				}
 			}
@@ -96,6 +93,10 @@ public class Level {
 			if (i == indexes.get(a)) {return true;}
     	}
     	return false;
+    }
+    
+    private int getRicochet(Wall w, Ball b) {
+    	
     }
 	
 }
