@@ -80,7 +80,6 @@ public class Ball {
     
     //add a method to the ball that allows it to paint itself
     public void paint(Graphics g) {
-    	if (angle < 0) {angle +=360;}
         radians = (angle*(Math.PI/180));
         //System.out.println(radians);
         

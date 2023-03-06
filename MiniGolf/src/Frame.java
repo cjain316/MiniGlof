@@ -40,8 +40,9 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
         Point point = p.getLocation();
         SwingUtilities.convertPointFromScreen(point, getFocusCycleRootAncestor());
         point.setLocation(point.getX()-7,point.getY()-31);
-        
+        if (levels[level].getBall().getVelocity() == 0) {
         levels[level].getBall().setAngle(calculateAngle(levels[level].getBall(),point));
+        }
         
         if (levels[level].getCompleted() && !(level+1 >= levels.length)) {level++;}
         
@@ -193,20 +194,21 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	}
 	
 	public int calculateAngle(Ball b, Point cursor) {
-		int x_dist = (int) Math.abs(b.getX()+b.getWidth()/2 - cursor.getX());
-		int y_dist = (int) Math.abs(b.getY()+b.getWidth()/2 - cursor.getY());
+		double x_dist = (b.getX()+b.getWidth()/2 - cursor.getX());
+		double y_dist = (b.getY()+b.getWidth()/2 - cursor.getY());
 		
 		if (x_dist == 0) {
 			return 0;
 		}
-		double result = Math.atan(y_dist/x_dist);
+		double result = Math.atan(Math.abs(y_dist/x_dist));
+		//System.out.println("x_dist: " + x_dist + " y_dist: " + y_dist + " Result: " + result);
 		
-		if (x_dist > 0) {
-			if (y_dist > 0) return (int)(Math.toDegrees(result)); // Quadrant 1
+		if (x_dist < 0) {
+			if (y_dist < 0) return (int)(Math.toDegrees(result)); // Quadrant 1
 			else return 360-(int)(Math.toDegrees(result)); // Quadrant 4
 		} else {
-			if (y_dist > 0) return 180-(int)(Math.toDegrees(result)); // Quadrant 2
-			else return 270 - (int)(Math.toDegrees(result)); // Quadrant 3
+			if (y_dist < 0) return 180-(int)(Math.toDegrees(result)); // Quadrant 2
+			else return 180 + (int)(Math.toDegrees(result)); // Quadrant 3
 		}
 		
 	}
