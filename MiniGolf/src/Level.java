@@ -10,7 +10,6 @@ public class Level {
 	Hole hole;
 	private int timer = 0;
 	private boolean skipframe = false;
-	ArrayList<Integer> indexes = new ArrayList<Integer>();
 
 	public void paint(Graphics g) {
 		boolean done = false;
@@ -24,19 +23,14 @@ public class Level {
 		//Collision detection
 		for (int i = 0; i < walls.size();i++) {
 			if (colliding(ball,walls.get(i)) && !in(i)) {
-				System.out.println("Cosine:" + Math.cos(Math.abs(ball.getAngle())));
-				System.out.println("Sin:" + Math.sin(Math.abs(ball.getAngle())));
-				ball.setVelocity(ball.getVelocity()+0.5);
-				indexes.add(i);
 				//ricochet
 				if (walls.get(i).getHorizontal()) {ball.setAngle(180-(ball.getAngle()));} 
+					//DANIAL RIGHT HERE THIS IS WHERE THE METHOD CALL GOES
+					//THE WALLS ARE ALREADY DEFINED AS HORIZONTAL OR VERTICAL
 				if (!walls.get(i).getHorizontal()) {
-					//first (0 - -90) -90
-					//second (-90,-180) +90
-					//third (-180,-270) -90
-					//fourth (-270,-360) +90
-					
-					done = false;
+					//DANIAL RIGHT HERE THIS IS WHERE THE METHOD CALL GOES
+					//THE WALLS ARE ALREADY DEFINED AS HORIZONTAL OR VERTICAL
+
 				}
 			}
 		}
