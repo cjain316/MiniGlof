@@ -43,8 +43,6 @@ public class Level {
 			complete = true;
 		}
 		
-		for (int b = 0; b < walls.size();b++) {if (!colliding(ball,walls.get(b))) {if (getIndexOf(indexes,b) != -1) {
-			indexes.remove(getIndexOf(indexes,b));}}}
 	}
 	
 	public void addWall(Wall w) {
