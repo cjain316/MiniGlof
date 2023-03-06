@@ -3,20 +3,26 @@ import java.awt.event.KeyEvent;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 
 
-public class Frame extends JPanel implements KeyListener, ActionListener{
+public class Frame extends JPanel implements KeyListener, ActionListener, MouseListener{
     private Image Sprite = null;
     private int tempvel = 0;
     private AffineTransform tx;
@@ -29,6 +35,12 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
     public void paint(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        
+        PointerInfo p = MouseInfo.getPointerInfo();
+        Point point = p.getLocation();
+        SwingUtilities.convertPointFromScreen(point, getFocusCycleRootAncestor());
+        point.setLocation(point.getX()-7,point.getY()-31);
+        
         if (levels[level].getCompleted() && !(level+1 >= levels.length)) {level++;}
         
         g.setColor(new Color(207, 255, 189));
@@ -137,6 +149,50 @@ public class Frame extends JPanel implements KeyListener, ActionListener{
         } catch (Exception e) {e.printStackTrace();}
         return tempImage;
     }
+
+
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public int calculateAngle(Ball b, Point cursor) {
+		
+	}
     
     
 }
