@@ -26,11 +26,11 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     private Image Sprite = null;
     private int tempvel = 0;
     private AffineTransform tx;
-    private int level = 2;
+    private int level = 0;
     private Level[] levels = {
     		new Level(1000,700,980,230),
     		new Level(420,700,1400,430),
-    		new Level(420,700,1400,700),
+    		new Level(320,300,1450,300),
     };
     /* paint is getting called roughly 144x per second */
     public void paint(Graphics g) {
@@ -121,7 +121,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     	levels[2].addWall(new Wall(860,400,100,500));
     	levels[2].addWall(new Wall(460,200,100,500));
     	levels[2].addWall(new Wall(1260,200,100,500));
-    	levels[2].addWall(new Wall(1260,705,100,2));
     	
         JFrame f = new JFrame("Mini Golf");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

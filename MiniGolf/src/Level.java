@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -20,23 +21,26 @@ public class Level {
 		hole.paint(g);
 		
 		//Collision detection
+		Rectangle xtest;
+		Rectangle ytest;
+		//System.out.println(ball.getVx());
 		for (int i = 0; i < walls.size();i++) {
-			if (timer == 0) {
-				Rectangle xtest = ball.getHitbox();
-				Rectangle ytest = ball.getHitbox();
-				xtest.setLocation((int)(ball.getX()+ball.getVx()),ball.getY());
-				ytest.setLocation(ball.getX(),(int)(ball.getY()+ball.getVy()));
-				if (xtest.intersects(walls.get(i).getHitbox())) {
-					ball.setVx(ball.getVx()*-1);
-					
-				}
-				if (ytest.intersects(walls.get(i).getHitbox())) {		
-					ball.setVy(ball.getVy()*-1);
-					
-				}
-				if (colliding(ball,walls.get(i))) {
-					ball.setVelocity(ball.getVelocity()+1);
-				}
+			xtest = new Rectangle(0,0,30,30);
+			ytest = new Rectangle(0,0,30,30);
+			xtest.setLocation((int)(ball.getX()+(ball.getVx()*ball.getVelocity())),ball.getY());
+			ytest.setLocation(ball.getX(),(int)(ball.getY()+(ball.getVy()*ball.getVelocity())));
+			//g.setColor(new Color(255,0,0));
+			//g.fillRect((int)xtest.getX(),(int)xtest.getY(),30,30);
+			//g.setColor(new Color(0,255,0));
+			//g.fillRect((int)ytest.getX(),(int)ytest.getY(),30,30);
+			if (xtest.intersects(walls.get(i).getHitbox())) {
+				ball.setVx(ball.getVx()*-1);
+			}
+			else if (ytest.intersects(walls.get(i).getHitbox())) {		
+				ball.setVy(ball.getVy()*-1);	
+			}
+			if (colliding(ball,walls.get(i))) {
+				ball.setVelocity(ball.getVelocity()+1);
 			}
 					
 		}
@@ -45,9 +49,12 @@ public class Level {
 			ball.paint(g);
 			g.drawLine(ball.getX()+15,ball.getY()+15,15+(int)ball.getX() + (int)(ball.getVx()*200),15+(int)ball.getY() + (int)(ball.getVy()*200));
 			g.fillRect(30,30,(int)ball.getVelocity()*10,50);
+			
+			
 		} else {
 			complete = true;
 		}
+		
 		
 	}
 	
