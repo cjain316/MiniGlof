@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Rectangle;
 
 public class Ball {
@@ -82,9 +83,11 @@ public class Ball {
     public void paint(Graphics g) {
         radians = (angle*(Math.PI/180));
         //System.out.println(radians);
+        if (velocity == 0) { 
+        	slopex = Math.cos(radians);
+        	slopey = Math.sin(radians);
+        }
         
-        slopex = Math.cos(radians);
-        slopey = Math.sin(radians);
         //update velocity
     	if (velocity > 0) {velocity-=0.5;}
         x += (slopex*velocity*10)/10;
@@ -98,4 +101,28 @@ public class Ball {
         g.fillOval(x, y, width, width);
         
     }
+    
+    public void recalculate(double nslopex, double nslopey) {
+    	angle = calculateAngle(nslopex,nslopey);
+    }
+    
+    public int calculateAngle(double nslopex, double nslopey) {
+		double x_dist = slopex;
+		double y_dist = slopey;
+		
+		if (x_dist == 0) {
+			return 0;
+		}
+		double result = Math.atan(Math.abs(y_dist/x_dist));
+		//System.out.println("x_dist: " + x_dist + " y_dist: " + y_dist + " Result: " + result);
+		
+		if (x_dist < 0) {
+			if (y_dist < 0) return (int)(Math.toDegrees(result)); // Quadrant 1
+			else return 360-(int)(Math.toDegrees(result)); // Quadrant 4
+		} else {
+			if (y_dist < 0) return 180-(int)(Math.toDegrees(result)); // Quadrant 2
+			else return 180 + (int)(Math.toDegrees(result)); // Quadrant 3
+		}
+		
+	}
 }

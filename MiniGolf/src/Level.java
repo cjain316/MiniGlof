@@ -9,7 +9,6 @@ public class Level {
 	Ball ball;
 	Hole hole;
 	private int timer = 0;
-	private boolean skipframe = false;
 
 	public void paint(Graphics g) {
 		boolean done = false;
@@ -22,16 +21,15 @@ public class Level {
 		
 		//Collision detection
 		for (int i = 0; i < walls.size();i++) {
-			if (colliding(ball,walls.get(i)) && !in(i)) {
+			if (colliding(ball,walls.get(i)) && timer == 0) {
 				//ricochet
-				if (walls.get(i).getHorizontal()) {ball.setAngle(180-(ball.getAngle()));} 
+				if (walls.get(i).getHorizontal()) {ball.setVy(ball.getVy()*-1); timer = 2;} 
 					//DANIAL RIGHT HERE THIS IS WHERE THE METHOD CALL GOES
 					//THE WALLS ARE ALREADY DEFINED AS HORIZONTAL OR VERTICAL
-				if (!walls.get(i).getHorizontal()) {
+				if (!walls.get(i).getHorizontal()) {ball.setVx(ball.getVx()*-1); timer = 2;}
 					//DANIAL RIGHT HERE THIS IS WHERE THE METHOD CALL GOES
 					//THE WALLS ARE ALREADY DEFINED AS HORIZONTAL OR VERTICAL
 
-				}
 			}
 		}
 		hole.paint(g);
@@ -79,16 +77,9 @@ public class Level {
     	}
     	return -1;
     }
-    
-    private boolean in(int i) {
-    	for (int a = 0; a < indexes.size();a++) {
-			if (i == indexes.get(a)) {return true;}
-    	}
-    	return false;
-    }
-    
-    private int getRicochet(Wall w, Ball b) {
+
+    //private int getRicochet(Wall w, Ball b) {
     	
-    }
+    //}
 	
 }

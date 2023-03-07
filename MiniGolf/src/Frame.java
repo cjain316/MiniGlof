@@ -31,6 +31,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     		new Level(1000,700,980,230),
     		new Level(420,700,1400,430),
     };
+    private Point pos1,pos2;
     /* paint is getting called roughly 144x per second */
     public void paint(Graphics g) {
         super.paintComponent(g);
@@ -40,15 +41,10 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
         Point point = p.getLocation();
         SwingUtilities.convertPointFromScreen(point, getFocusCycleRootAncestor());
         point.setLocation(point.getX()-7,point.getY()-31);
-        if (levels[level].getBall().getVelocity() == 0) {
-        levels[level].getBall().setAngle(calculateAngle(levels[level].getBall(),point));
-        }
-        
+        if (levels[level].getBall().getVelocity() == 0) {levels[level].getBall().setAngle(calculateAngle(levels[level].getBall(),point));}
         if (levels[level].getCompleted() && !(level+1 >= levels.length)) {level++;}
-        
         g.setColor(new Color(207, 255, 189));
         g.fillRect(0, 0, 1920, 1080);
-        
         levels[level].paint(g);
         g.setColor(new Color(tempvel*4,240-tempvel*6,0));
         g.fillRect(30,30,tempvel*10,50);
@@ -64,6 +60,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
         Frame f = new Frame();
         
     }    
+    
     
     @Override
     public void keyPressed(KeyEvent arg) {
@@ -86,8 +83,10 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     		else {levels[level].getBall().setAngle(levels[level].getBall().getAngle()+10);}
     	}
     	if (arg.getExtendedKeyCode() == 32) {
-    		levels[level].getBall().setVelocity(tempvel);
-    		tempvel = 0;
+    		if (levels[level].getBall().getVelocity() == 0) {
+    			levels[level].getBall().setVelocity(tempvel);
+    			tempvel = 0;
+    		}
     	}
     }
 
@@ -159,6 +158,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+		
 	}
 
 
@@ -190,7 +190,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		 
 	}
 	
 	public int calculateAngle(Ball b, Point cursor) {
