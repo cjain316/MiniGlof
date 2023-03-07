@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 public class Level {
@@ -11,7 +12,6 @@ public class Level {
 	private int timer = 0;
 
 	public void paint(Graphics g) {
-		boolean done = false;
 		//Timer decrement
 		if (timer > 0) {timer--;}
 		
@@ -21,16 +21,24 @@ public class Level {
 		
 		//Collision detection
 		for (int i = 0; i < walls.size();i++) {
-			if (colliding(ball,walls.get(i)) && timer == 0) {
-				//ricochet
-				if (walls.get(i).getHorizontal()) {ball.setVy(ball.getVy()*-1); timer = 2;} 
-					//DANIAL RIGHT HERE THIS IS WHERE THE METHOD CALL GOES
-					//THE WALLS ARE ALREADY DEFINED AS HORIZONTAL OR VERTICAL
-				if (!walls.get(i).getHorizontal()) {ball.setVx(ball.getVx()*-1); timer = 2;}
-					//DANIAL RIGHT HERE THIS IS WHERE THE METHOD CALL GOES
-					//THE WALLS ARE ALREADY DEFINED AS HORIZONTAL OR VERTICAL
-
+			if (timer == 0) {
+				Rectangle xtest = ball.getHitbox();
+				Rectangle ytest = ball.getHitbox();
+				xtest.setLocation((int)(ball.getX()+ball.getVx()),ball.getY());
+				ytest.setLocation(ball.getX(),(int)(ball.getY()+ball.getVy()));
+				if (xtest.intersects(walls.get(i).getHitbox())) {
+					ball.setVx(ball.getVx()*-1);
+					
+				}
+				if (ytest.intersects(walls.get(i).getHitbox())) {		
+					ball.setVy(ball.getVy()*-1);
+					
+				}
+				if (colliding(ball,walls.get(i))) {
+					ball.setVelocity(ball.getVelocity()+1);
+				}
 			}
+					
 		}
 		hole.paint(g);
 		if (!colliding(ball,hole)) {

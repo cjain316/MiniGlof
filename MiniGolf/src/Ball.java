@@ -26,11 +26,9 @@ public class Ball {
     public void setWidth(int width) {this.width = width;}
 
     public double getVx() {return slopex;}
-
     public void setVx(double vx) {this.slopex = vx;}
-
+    
     public double getVy() {return slopey;}
-
     public void setVy(double vy) {this.slopey = vy;}
 
     public Color getColor() {return color;}

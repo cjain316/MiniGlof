@@ -26,12 +26,12 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     private Image Sprite = null;
     private int tempvel = 0;
     private AffineTransform tx;
-    private int level = 0;
+    private int level = 2;
     private Level[] levels = {
     		new Level(1000,700,980,230),
     		new Level(420,700,1400,430),
+    		new Level(420,700,1400,700),
     };
-    private Point pos1,pos2;
     /* paint is getting called roughly 144x per second */
     public void paint(Graphics g) {
         super.paintComponent(g);
@@ -41,6 +41,17 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
         Point point = p.getLocation();
         SwingUtilities.convertPointFromScreen(point, getFocusCycleRootAncestor());
         point.setLocation(point.getX()-7,point.getY()-31);
+        Ball b = levels[level].getBall();
+        
+        double x_dist = (b.getX()+b.getWidth()/2 - point.getX());
+		double y_dist = (b.getY()+b.getWidth()/2 - point.getY());
+		
+		if (levels[level].getBall().getVelocity() == 0) {
+			tempvel = (int) Math.sqrt(Math.pow(x_dist,2) + Math.pow(y_dist,2)) / 15;
+			if (tempvel > 40) {tempvel = 40;}
+		}
+        
+        
         if (levels[level].getBall().getVelocity() == 0) {levels[level].getBall().setAngle(calculateAngle(levels[level].getBall(),point));}
         if (levels[level].getCompleted() && !(level+1 >= levels.length)) {level++;}
         g.setColor(new Color(207, 255, 189));
@@ -65,29 +76,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     @Override
     public void keyPressed(KeyEvent arg) {
     	//System.out.println(arg.getExtendedKeyCode());
-    	if (arg.getExtendedKeyCode() == 87) {
-    		if (tempvel < 40) {
-    			tempvel += 1;
-    		}
-    	}
-    	if (arg.getExtendedKeyCode() == 83) {
-    		if (tempvel > 0) {
-    			tempvel -= 1;
-    		}
-    	}
-    	if (arg.getExtendedKeyCode() == 65) {
-    		levels[level].getBall().setAngle(levels[level].getBall().getAngle()-10);
-    	}
-    	if (arg.getExtendedKeyCode() == 68) {
-    		if (levels[level].getBall().getAngle() == 0) {levels[level].getBall().setAngle(-350);}
-    		else {levels[level].getBall().setAngle(levels[level].getBall().getAngle()+10);}
-    	}
-    	if (arg.getExtendedKeyCode() == 32) {
-    		if (levels[level].getBall().getVelocity() == 0) {
-    			levels[level].getBall().setVelocity(tempvel);
-    			tempvel = 0;
-    		}
-    	}
     }
 
     @Override
@@ -126,10 +114,20 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     	levels[1].addWall(new Wall(600,599,900,100));
     	levels[1].addWall(new Wall(1500,200,100,500));
     	
+    	levels[2].addWall(new Wall(100,200,100,700));
+    	levels[2].addWall(new Wall(1600,200,100,700));
+    	levels[2].addWall(new Wall(100,100,1600,100));
+    	levels[2].addWall(new Wall(100,900,1600,100));
+    	levels[2].addWall(new Wall(860,400,100,500));
+    	levels[2].addWall(new Wall(460,200,100,500));
+    	levels[2].addWall(new Wall(1260,200,100,500));
+    	levels[2].addWall(new Wall(1260,705,100,2));
+    	
         JFrame f = new JFrame("Mini Golf");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.add(this);
         f.addKeyListener(this);
+        f.addMouseListener(this);
         
         f.setResizable(false);
         f.setExtendedState(JFrame.MAXIMIZED_BOTH); 
@@ -154,20 +152,11 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-		
-	}
+	
 
 
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 
 
@@ -182,6 +171,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -209,6 +199,28 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 			if (y_dist < 0) return 180-(int)(Math.toDegrees(result)); // Quadrant 2
 			else return 180 + (int)(Math.toDegrees(result)); // Quadrant 3
 		}
+		
+	}
+	
+
+
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		repaint();
+		if (levels[level].getBall().getVelocity() == 0) {
+			levels[level].getBall().setVelocity(tempvel);
+			tempvel = 0;
+		}
+		
+	}
+
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
     
