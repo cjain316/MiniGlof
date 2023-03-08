@@ -58,6 +58,10 @@ public class Level {
 		
 	}
 	
+	public void setMoving(boolean moving, int amount, int speed, boolean horizontal) {
+		walls.get(walls.size()-1).setMoving(moving, amount, speed, horizontal);
+	}
+	
 	public void addWall(Wall w) {
 		walls.add(w);
 	}

@@ -31,7 +31,10 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     		new Level(1000,700,980,230),
     		new Level(420,700,1400,430),
     		new Level(320,300,1450,300),
+    		new Level(385,535,1485,525),
+ // }: sad
     };
+    
     /* paint is getting called roughly 144x per second */
     public void paint(Graphics g) {
         super.paintComponent(g);
@@ -122,7 +125,14 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     	levels[2].addWall(new Wall(460,200,100,500));
     	levels[2].addWall(new Wall(1260,200,100,500));
     	
-        JFrame f = new JFrame("Mini Golf");
+    	levels[3].addWall(new Wall(200,200,1500,100));
+    	levels[3].addWall(new Wall(200,200,100,600));
+    	levels[3].addWall(new Wall(200,800,1500,100));
+    	levels[3].addWall(new Wall(1600,200,100,600));
+    	levels[3].addWall(new Wall(900,800,50,300));
+    	levels[3].setMoving(true,400,2,false);
+    	
+        JFrame f = new JFrame("Mr David give me an A pls");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.add(this);
         f.addKeyListener(this);
