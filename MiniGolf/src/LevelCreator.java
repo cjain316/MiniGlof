@@ -32,6 +32,7 @@ public class LevelCreator extends JPanel implements KeyListener, ActionListener,
     private Font font = new Font(Font.DIALOG_INPUT, Font.BOLD, 32);
     private ArrayList<String> controlbuffer = new ArrayList<String>();
     private Point pos1,pos2;
+    private int levelnumber = 8;
     private Level[] levels = {
     		new Level(100,100,200,200),
  // }: sad
@@ -79,6 +80,8 @@ public class LevelCreator extends JPanel implements KeyListener, ActionListener,
 		g.drawString("Hole Strokes: " + holestrokes, 1550, 50);
 		g.drawString("Total Strokes: " + strokes, 1550, 80);
 		g.drawString("Hole " + ((int)level+1), 1700, 1040);
+		
+		g.drawString("X: " + point.getX() + " Y: " + point.getY(), 100, 1000);
 		
 		
 		g.setColor(Color.BLACK);
