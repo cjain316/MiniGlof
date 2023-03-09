@@ -45,6 +45,7 @@ public class LevelCreator extends JPanel implements KeyListener, ActionListener,
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         
+        
         PointerInfo p = MouseInfo.getPointerInfo();
         Point point = p.getLocation();
         SwingUtilities.convertPointFromScreen(point, getFocusCycleRootAncestor());
@@ -79,6 +80,12 @@ public class LevelCreator extends JPanel implements KeyListener, ActionListener,
 		g.drawString("Total Strokes: " + strokes, 1550, 80);
 		g.drawString("Hole " + ((int)level+1), 1700, 1040);
 		
+		
+		g.setColor(Color.BLACK);
+        for (int i = 0; i < 100; i ++) {
+        	g.drawLine(50*i,0,50*i,1920);
+        	g.drawLine(0,50*i,1920,50*i);
+        }
 	}
     
     

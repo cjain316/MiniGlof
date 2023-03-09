@@ -37,6 +37,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     		new Level(385,535,1485,525),
     		new Level(585,535,1485,525),
     		new Level(585,535,1600,250),
+    		new Level(700,450,1050,425),
+    		new Level(400,600,1500,550),
  // }: sad
     };
     private int holestrokes = 0;
@@ -161,6 +163,26 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     	levels[5].addWall(new Wall(1400, 100, 100, 200));
     	levels[5].addWall(new Wall(1600, 400, 200, 100));
     	levels[5].addWall(new Wall(1100, 400, 200, 200));
+    	
+    	levels[6].addWall(new Wall(1000, 300, 50, 300));
+    	levels[6].addWall(new Wall(1100, 300, 50, 300));
+    	levels[6].addWall(new Wall(500, 50, 950, 100));
+    	levels[6].addWall(new Wall(1450, 50, 100, 800));
+    	levels[6].addWall(new Wall(500, 750, 1050, 100));
+    	levels[6].addWall(new Wall(450, 50, 100, 800));
+    	
+    	levels[7].addWall(new Wall(150, 200, 100, 750));
+    	levels[7].addWall(new Wall(150, 200, 1550, 50));
+    	levels[7].addWall(new Wall(1650, 200, 100, 750));
+    	levels[7].addWall(new Wall(150, 900, 1600, 50));
+    	levels[7].addWall(new Wall(700, 300, 50, 250));
+    	levels[7].setMoving(true,200,5,false);
+    	levels[7].addWall(new Wall(700, 700, 50, 550));
+    	levels[7].setMoving(true,200,5,false);
+    	levels[7].addWall(new Wall(1050, 350, 50, 350));
+    	levels[7].setMoving(true,200,5,false);
+    	levels[7].addWall(new Wall(1050, 850, 50, 400));
+    	levels[7].setMoving(true,200,5,false);
     	
         JFrame f = new JFrame("Mr David give me an A pls");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
