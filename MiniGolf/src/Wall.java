@@ -27,19 +27,17 @@ public class Wall {
 	
 	public void paint(Graphics g) {
 		if (timer > 0) {timer--;}
-		if (counter == 10) {counter = 0; alternate = !alternate;}
+		if (counter == (10*movementSpeed)) {counter = 0; alternate = !alternate;}
 		if (moving) {
 			if (movinghorizontal && timer == 0) {
 				counter++;
-				timer = movementSpeed;
-				if (alternate) {x+=movementAmount/10;}
-				else {x-=movementAmount/10;}
+				if (alternate) {x+=movementAmount/(10*movementSpeed);}
+				else {x-=movementAmount/(10*movementSpeed);}
 			}
 			if (!movinghorizontal && timer == 0) {
 				counter++;
-				timer = movementSpeed;
-				if (alternate) {y += movementAmount/10;}
-				else {y -= movementAmount/10;}
+				if (alternate) {y += movementAmount/(10*movementSpeed);}
+				else {y -= movementAmount/(10*movementSpeed);}
 			}
 		}
 		hitbox.setLocation(x,y);

@@ -24,21 +24,19 @@ import javax.swing.Timer;
 
 
 
-public class Frame extends JPanel implements KeyListener, ActionListener, MouseListener{
+public class LevelCreator extends JPanel implements KeyListener, ActionListener, MouseListener{
     private Image Sprite = null;
     private int tempvel = 0;
     private AffineTransform tx;
     private int level = 0;
     private Font font = new Font(Font.DIALOG_INPUT, Font.BOLD, 32);
+    private ArrayList<String> controlbuffer = new ArrayList<String>();
+    private Point pos1,pos2;
     private Level[] levels = {
-    		new Level(1000,700,980,230),
-    		new Level(420,700,1400,430),
-    		new Level(320,300,1450,300),
-    		new Level(385,535,1485,525),
-    		new Level(585,535,1485,525),
-    		new Level(585,535,1600,250),
+    		new Level(100,100,200,200),
  // }: sad
     };
+    private ArrayList<String> levelCode = new ArrayList<String>();
     private int holestrokes = 0;
     private int strokes = 0;
     
@@ -86,7 +84,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     
     
     public static void main(String[] arg) {
-        Frame f = new Frame();
+        LevelCreator f = new LevelCreator();
         
     }    
     
@@ -94,6 +92,10 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     @Override
     public void keyPressed(KeyEvent arg) {
     	//System.out.println(arg.getExtendedKeyCode());
+    	if (arg.getExtendedKeyCode() == 90) {
+    		levels[0].removeWall();
+    		levelCode.remove(levelCode.size()-1);
+    	}
     }
 
     @Override
@@ -119,48 +121,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     
     Timer t;
     
-    public Frame() {
-    	levels[0].addWall(new Wall(1200,200,100,700));
-    	levels[0].addWall(new Wall(720,200,100,700));
-    	levels[0].addWall(new Wall(720,100,580,100));
-    	levels[0].addWall(new Wall(720,900,580,100));
-    	
-    	levels[1].addWall(new Wall(200,200,1300,100));
-    	levels[1].addWall(new Wall(200,200,100,800));
-    	levels[1].addWall(new Wall(200,900,500,100));
-    	levels[1].addWall(new Wall(600,600,100,300));
-    	levels[1].addWall(new Wall(600,599,900,100));
-    	levels[1].addWall(new Wall(1500,200,100,500));
-    	
-    	levels[2].addWall(new Wall(100,200,100,700));
-    	levels[2].addWall(new Wall(1600,200,100,700));
-    	levels[2].addWall(new Wall(100,100,1600,100));
-    	levels[2].addWall(new Wall(100,900,1600,100));
-    	levels[2].addWall(new Wall(860,400,100,500));
-    	levels[2].addWall(new Wall(460,200,100,500));
-    	levels[2].addWall(new Wall(1260,200,100,500));
-    	
-    	levels[3].addWall(new Wall(200,200,1500,100));
-    	levels[3].addWall(new Wall(200,200,100,600));
-    	levels[3].addWall(new Wall(200,800,1500,100));
-    	levels[3].addWall(new Wall(1600,200,100,600));
-    	levels[3].addWall(new Wall(900,800,50,300));
-    	levels[3].setMoving(true,400,2,false);
-    	
-    	levels[4].addWall(new Wall(400, 200, 100, 600));
-    	levels[4].addWall(new Wall(400, 200, 1300, 100));
-    	levels[4].addWall(new Wall(1600, 200, 100, 600));
-    	levels[4].addWall(new Wall(400, 800, 1300, 100));
-    	levels[4].addWall(new Wall(700, 450, 200, 200));
-    	levels[4].addWall(new Wall(1200, 450, 200, 200));
-    	
-    	levels[5].addWall(new Wall(500, 100, 1300, 100));
-    	levels[5].addWall(new Wall(1700, 100, 100, 700));
-    	levels[5].addWall(new Wall(400, 100, 100, 700));
-    	levels[5].addWall(new Wall(400, 800, 1400, 100));
-    	levels[5].addWall(new Wall(1400, 100, 100, 200));
-    	levels[5].addWall(new Wall(1600, 400, 200, 100));
-    	levels[5].addWall(new Wall(1100, 400, 200, 200));
+    public LevelCreator() {
     	
         JFrame f = new JFrame("Mr David give me an A pls");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -191,9 +152,27 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 
 
 
-	
+	public void createnew() {
+		if (pos1 != null && pos2 != null) {
+			levels[0].addWall(new Wall((int)pos1.getX(),(int)pos1.getY(),(int)pos2.getX()-(int)pos1.getX(),(int)pos2.getY()-(int)pos1.getY()));
+			levelCode.add( ("levels[0].addWall(new Wall(" + (int)pos1.getX() + ", " + (int)pos1.getY() + ", " + ((int)pos2.getX()-(int)pos1.getX()) + ", " + ((int)pos2.getY()-(int)pos1.getY())+ "));" + "\n") );
+			pos1 = null;
+			pos2 = null;
+			for (int i = 0; i < 100; i++) {
+				System.out.println("\n");
+			}
+			System.out.println(arr2string(levelCode));
+		}
+		//
+	}
 
-
+	public String arr2string(ArrayList<String> s) {
+		String output = "";
+		for (int i = 0; i < s.size(); i++) {
+			output += (s.get(i));
+		}
+		return output;
+	}
 
 	
 
@@ -202,6 +181,14 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
+		//System.out.println("mousereleased");
+		PointerInfo p = MouseInfo.getPointerInfo();
+        Point point = p.getLocation();
+        SwingUtilities.convertPointFromScreen(point, getFocusCycleRootAncestor());
+        point.setLocation(point.getX()-7,point.getY()-31);
+        pos2 = new Point((int)point.getX(),(int)point.getY());
+        
+        createnew();
 		
 	}
 
@@ -248,13 +235,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-		if (levels[level].getBall().getVelocity() == 0) {
-			levels[level].getBall().setVelocity(tempvel);
-			tempvel = 0;
-			holestrokes++;
-		}
-		repaint();
-		
 	}
 
 
@@ -262,12 +242,14 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		//System.out.println("mouseclicked");
+		PointerInfo p = MouseInfo.getPointerInfo();
+        Point point = p.getLocation();
+        SwingUtilities.convertPointFromScreen(point, getFocusCycleRootAncestor());
+        point.setLocation(point.getX()-7,point.getY()-31);
+        pos1 = new Point((int)point.getX(),(int)point.getY());
+		repaint();
 	}
     
     
-}
-
-class Background {
-	
 }
