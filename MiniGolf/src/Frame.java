@@ -28,8 +28,9 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     private Image Sprite = null;
     private int tempvel = 0;
     private AffineTransform tx;
-    private int level = 0;
+    private int level = 6;
     private Font font = new Font(Font.DIALOG_INPUT, Font.BOLD, 32);
+    private ArrayList<Integer> controlbuffer = new ArrayList<Integer>();
     private Level[] levels = {
     		new Level(1000,700,980,230),
     		new Level(420,700,1400,430),
@@ -37,8 +38,9 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     		new Level(385,535,1485,525),
     		new Level(585,535,1485,525),
     		new Level(585,535,1600,250),
-    		new Level(700,450,1050,425),
+    		new Level(700,450,1025,425),
     		new Level(400,600,1500,550),
+    		new Level(100,100,200,200),
  // }: sad
     };
     private int holestrokes = 0;
@@ -48,6 +50,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     public void paint(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        
+        readControlBuffer();
         
         PointerInfo p = MouseInfo.getPointerInfo();
         Point point = p.getLocation();
@@ -72,6 +76,12 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
         g.setColor(new Color(tempvel*4,240-tempvel*6,0));
         g.fillRect(30,30,tempvel*10,50);
         
+        if (level == 7) {
+        	g.setColor(new Color(97, 186, 121));
+        	g.fillRect(0, 0, 1920, 200);
+        	g.fillRect(0, 950, 1920, 950);
+        }
+        
         tx = AffineTransform.getTranslateInstance(30, 30);
 		Sprite = getImage("resources\\power bar.png");
 		g2.drawImage(Sprite, tx, null);
@@ -85,7 +95,22 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		
 	}
     
-    
+    public void readControlBuffer() {
+    	if (controlbuffer.size() > 0) {
+    		while (controlbuffer.size() > 0) {
+    			//Setting controls
+    			
+    			if (controlbuffer.get(0) == 100) { // mouse clicked
+    				if ((int)levels[level].getBall().getVelocity() == 0) {
+    					levels[level].getBall().setVelocity(tempvel);
+    					tempvel = 0;
+    					holestrokes++;
+    				}
+    				controlbuffer.remove(0);
+    			}
+    		}
+    	}
+    }
     
     public static void main(String[] arg) {
         Frame f = new Frame();
@@ -164,12 +189,12 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     	levels[5].addWall(new Wall(1600, 400, 200, 100));
     	levels[5].addWall(new Wall(1100, 400, 200, 200));
     	
-    	levels[6].addWall(new Wall(1000, 300, 50, 300));
-    	levels[6].addWall(new Wall(1100, 300, 50, 300));
-    	levels[6].addWall(new Wall(500, 50, 950, 100));
-    	levels[6].addWall(new Wall(1450, 50, 100, 800));
-    	levels[6].addWall(new Wall(500, 750, 1050, 100));
-    	levels[6].addWall(new Wall(450, 50, 100, 800));
+    	levels[6].addWall(new Wall(450, 200, 100, 550));
+    	levels[6].addWall(new Wall(550, 700, 1000, 50));
+    	levels[6].addWall(new Wall(1500, 200, 100, 550));
+    	levels[6].addWall(new Wall(550, 200, 1000, 50));
+    	levels[6].addWall(new Wall(950, 350, 50, 250));
+    	levels[6].addWall(new Wall(1100, 350, 50, 250));
     	
     	levels[7].addWall(new Wall(150, 200, 100, 750));
     	levels[7].addWall(new Wall(150, 200, 1550, 50));
@@ -184,7 +209,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     	levels[7].addWall(new Wall(1050, 850, 50, 400));
     	levels[7].setMoving(true,200,5,false);
     	
-        JFrame f = new JFrame("Mr David give me an A pls");
+        JFrame f = new JFrame("A+ Project");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.add(this);
         f.addKeyListener(this);
@@ -270,13 +295,6 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-		if (levels[level].getBall().getVelocity() == 0) {
-			levels[level].getBall().setVelocity(tempvel);
-			tempvel = 0;
-			holestrokes++;
-		}
-		repaint();
-		
 	}
 
 
@@ -284,7 +302,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		controlbuffer.add(100);
+		repaint();
 	}
     
     

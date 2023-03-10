@@ -179,7 +179,7 @@ public class LevelCreator extends JPanel implements KeyListener, ActionListener,
 			else 				   {pos2.setLocation(pos2.getX(),pos2.getY()+(50-pos2.getY()%50));}
 			
 			levels[0].addWall(new Wall((int)pos1.getX(),(int)pos1.getY(),(int)pos2.getX()-(int)pos1.getX(),(int)pos2.getY()-(int)pos1.getY()));
-			levelCode.add( ("levels[0].addWall(new Wall(" + (int)pos1.getX() + ", " + (int)pos1.getY() + ", " + ((int)pos2.getX()-(int)pos1.getX()) + ", " + ((int)pos2.getY()-(int)pos1.getY())+ "));" + "\n") );
+			levelCode.add( ("levels[" + levelnumber +"].addWall(new Wall(" + (int)pos1.getX() + ", " + (int)pos1.getY() + ", " + ((int)pos2.getX()-(int)pos1.getX()) + ", " + ((int)pos2.getY()-(int)pos1.getY())+ "));" + "\n") );
 			pos1 = null;
 			pos2 = null;
 			for (int i = 0; i < 100; i++) {
