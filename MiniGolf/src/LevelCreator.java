@@ -84,11 +84,13 @@ public class LevelCreator extends JPanel implements KeyListener, ActionListener,
 		g.drawString("X: " + point.getX() + " Y: " + point.getY(), 100, 1000);
 		
 		
+		
 		g.setColor(Color.BLACK);
         for (int i = 0; i < 100; i ++) {
         	g.drawLine(50*i,0,50*i,1920);
         	g.drawLine(0,50*i,1920,50*i);
         }
+        
 	}
     
     
@@ -164,6 +166,18 @@ public class LevelCreator extends JPanel implements KeyListener, ActionListener,
 
 	public void createnew() {
 		if (pos1 != null && pos2 != null) {
+			if (pos1.getX()%50<25) {pos1.setLocation(pos1.getX()-(pos1.getX()%50),pos1.getY());}
+			else 				   {pos1.setLocation(pos1.getX()+(50-(pos1.getX()%50)),pos1.getY());}
+			
+			if (pos1.getY()%50<25) {pos1.setLocation(pos1.getX(),pos1.getY()-(pos1.getY()%50));}
+			else 				   {pos1.setLocation(pos1.getX(),pos1.getY()+(50-pos1.getY()%50));}
+			
+			if (pos2.getX()%50<25) {pos2.setLocation(pos2.getX()-(pos2.getX()%50),pos2.getY());}
+			else {pos2.setLocation(pos2.getX()+(50-(pos2.getX()%50)),pos2.getY());}
+			
+			if (pos2.getY()%50<25) {pos2.setLocation(pos2.getX(),pos2.getY()-(pos2.getY()%50));}
+			else 				   {pos2.setLocation(pos2.getX(),pos2.getY()+(50-pos2.getY()%50));}
+			
 			levels[0].addWall(new Wall((int)pos1.getX(),(int)pos1.getY(),(int)pos2.getX()-(int)pos1.getX(),(int)pos2.getY()-(int)pos1.getY()));
 			levelCode.add( ("levels[0].addWall(new Wall(" + (int)pos1.getX() + ", " + (int)pos1.getY() + ", " + ((int)pos2.getX()-(int)pos1.getX()) + ", " + ((int)pos2.getY()-(int)pos1.getY())+ "));" + "\n") );
 			pos1 = null;
