@@ -41,6 +41,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     		new Level(700,450,1025,425),
     		new Level(400,600,1500,550),
     		new Level(400,700,1025,475),
+    		new Level(400,520,950,250),
+    		new Level(400,520,1100,500),
  // }: sad
     };
     private int holestrokes = 0;
@@ -221,6 +223,41 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     	levels[8].addWall(new Wall(1100, 650, 150, 50));
     	levels[8].addWall(new Wall(850, 650, 150, 50));
     	levels[8].addWall(new Wall(850, 550, 50, 100));
+    	
+    	levels[9].addWall(new Wall(300, 150, 1350, 50));
+    	levels[9].addWall(new Wall(300, 200, 50, 650));
+    	levels[9].addWall(new Wall(300, 800, 1350, 50));
+    	levels[9].addWall(new Wall(1600, 150, 50, 700));
+    	levels[9].addWall(new Wall(600, 200, 50, 250));
+    	levels[9].addWall(new Wall(600, 550, 50, 250));
+    	levels[9].addWall(new Wall(850, 200, 50, 150));
+    	levels[9].addWall(new Wall(850, 450, 50, 350));
+    	levels[9].addWall(new Wall(1050, 200, 50, 350));
+    	levels[9].addWall(new Wall(1050, 650, 50, 200));
+    	levels[9].addWall(new Wall(1300, 150, 50, 350));
+    	levels[9].addWall(new Wall(1300, 600, 50, 250));
+    	
+    	levels[10].addWall(new Wall(150, 100, 1600, 50));
+    	levels[10].addWall(new Wall(1700, 100, 50, 850));
+    	levels[10].addWall(new Wall(150, 900, 1600, 50));
+    	levels[10].addWall(new Wall(150, 100, 50, 850));
+    	levels[10].addWall(new Wall(700, 600, 50, 100));
+    	levels[10].addWall(new Wall(750, 550, 50, 50));
+    	levels[10].addWall(new Wall(800, 500, 50, 50));
+    	levels[10].addWall(new Wall(850, 550, 50, 50));
+    	levels[10].addWall(new Wall(900, 600, 50, 100));
+    	levels[10].addWall(new Wall(950, 550, 50, 50));
+    	levels[10].addWall(new Wall(1000, 500, 50, 50));
+    	levels[10].addWall(new Wall(1050, 550, 50, 50));
+    	levels[10].addWall(new Wall(1100, 600, 50, 100));
+    	levels[10].addWall(new Wall(700, 450, 450, 50));
+    	levels[10].addWall(new Wall(700, 400, 100, 50));
+    	levels[10].addWall(new Wall(750, 350, 50, 50));
+    	levels[10].addWall(new Wall(900, 400, 50, 50));
+    	levels[10].addWall(new Wall(1050, 400, 100, 50));
+    	levels[10].addWall(new Wall(1050, 350, 50, 50));
+    	levels[10].addWall(new Wall(800, 350, 250, 50));
+    	levels[10].addWall(new Wall(800, 300, 250, 50));
     	
         JFrame f = new JFrame("A+ Project");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
