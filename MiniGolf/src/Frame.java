@@ -65,7 +65,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		double y_dist = (b.getY()+b.getWidth()/2 - point.getY());
 		
 		if (levels[level].getBall().getVelocity() == 0) {
-			tempvel = (int) Math.sqrt(Math.pow(x_dist,2) + Math.pow(y_dist,2)) / 15;
+			tempvel = (int) Math.sqrt(Math.pow(x_dist,2) + Math.pow(y_dist,2)) / 10;
 			if (tempvel > 40) {tempvel = 40;}
 		}
         
