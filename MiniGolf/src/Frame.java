@@ -92,7 +92,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		
 		g.setFont(font);
 		g.setColor(Color.WHITE);
-		g.drawString("Hole Strokes: " + holestrokes, 1550, 50);
+		g.drawString("Strokes: " + holestrokes, 1550, 50);
 		g.drawString("Total Strokes: " + strokes, 1550, 80);
 		g.drawString("Hole " + ((int)level+1), 1700, 1040);
 		
