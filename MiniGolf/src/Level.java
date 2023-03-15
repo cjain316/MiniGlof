@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Level {
 	private ArrayList<Wall> walls = new ArrayList<Wall>();
+	private ArrayList<Portal> portals = new ArrayList<Portal>();
 	private int startingx,startingy;
 	private int holex,holey;
 	private boolean complete;
@@ -18,12 +19,21 @@ public class Level {
 		
 		//painting walls
 		for (int i = 0; i < walls.size();i++) {walls.get(i).paint(g);}
+		for (int i = 0; i < portals.size();i++) {portals.get(i).paint(g);}
 		hole.paint(g);
 		
 		//Collision detection
 		Rectangle xtest;
 		Rectangle ytest;
 		//System.out.println(ball.getVx());
+		for (int i = 0; i < portals.size();i++) {
+			if (ball.getHitbox().intersects(portals.get(i).getHitbox())) {
+				ball.setX(portals.get(i).x2);
+				ball.setY(portals.get(i).y2);
+				ball.setVelocity(ball.getVelocity() + 1);
+			}
+		}
+		
 		for (int i = 0; i < walls.size();i++) {
 			xtest = new Rectangle(0,0,30,30);
 			ytest = new Rectangle(0,0,30,30);
@@ -68,6 +78,10 @@ public class Level {
 	
 	public void addWall(Wall w) {
 		walls.add(w);
+	}
+	
+	public void addPortal(Portal p) {
+		portals.add(p);
 	}
 	
 	public Level(int psx,int psy,int phx,int phy) {

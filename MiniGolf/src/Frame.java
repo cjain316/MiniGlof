@@ -28,7 +28,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     private Image Sprite = null;
     private int tempvel = 0;
     private AffineTransform tx;
-    private int level = 0;
+    private int level = 11;
     private Font font = new Font(Font.DIALOG_INPUT, Font.BOLD, 32);
     private ArrayList<Integer> controlbuffer = new ArrayList<Integer>();
     private Level[] levels = {
@@ -43,6 +43,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     		new Level(400,700,1025,475),
     		new Level(400,520,950,250),
     		new Level(400,520,1100,500),
+    		new Level(450,700,1450,320),
  // }: sad
     };
     private int holestrokes = 0;
@@ -258,6 +259,17 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     	levels[10].addWall(new Wall(1050, 350, 50, 50));
     	levels[10].addWall(new Wall(800, 350, 250, 50));
     	levels[10].addWall(new Wall(800, 300, 250, 50));
+    	
+    	levels[11].addWall(new Wall(200, 150, 100, 800));
+    	levels[11].addWall(new Wall(200, 850, 1500, 100));
+    	levels[11].addWall(new Wall(1600, 100, 100, 850));
+    	levels[11].addWall(new Wall(200, 100, 1500, 100));
+    	levels[11].addWall(new Wall(600, 200, 50, 700));
+    	levels[11].addWall(new Wall(950, 150, 50, 750));
+    	levels[11].addWall(new Wall(1300, 150, 50, 750));
+    	levels[11].addPortal(new Portal(350,250,200,50,800,750));
+    	levels[11].addPortal(new Portal(700,250,200,50,1150,750));
+    	levels[11].addPortal(new Portal(1050,250,200,50,1475,750));
     	
         JFrame f = new JFrame("A+ Project");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
