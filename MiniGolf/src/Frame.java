@@ -82,7 +82,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
         
         if (level == 7) {
         	g.setColor(new Color(97, 186, 121));
-        	g.fillRect(0, 0, 1920, 200);
+        	g.fillRect(500, 0, 1920, 200);
         	g.fillRect(0, 950, 1920, 950);
         }
         
