@@ -31,6 +31,10 @@ public class Level {
 				ball.setX(portals.get(i).x2);
 				ball.setY(portals.get(i).y2);
 				ball.setVelocity(ball.getVelocity() + 1);
+				if (portals.get(i).directionChange == 90) {
+					ball.setVy(0);
+					ball.setVx(1);
+				}
 			}
 		}
 		

@@ -44,6 +44,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     		new Level(400,520,950,250),
     		new Level(400,520,1100,500),
     		new Level(450,700,1450,320),
+    		new Level(665,700,1450,275),
  // }: sad
     };
     private int holestrokes = 0;
@@ -267,9 +268,26 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     	levels[11].addWall(new Wall(600, 200, 50, 700));
     	levels[11].addWall(new Wall(950, 150, 50, 750));
     	levels[11].addWall(new Wall(1300, 150, 50, 750));
-    	levels[11].addPortal(new Portal(350,250,200,50,800,750));
-    	levels[11].addPortal(new Portal(700,250,200,50,1150,750));
-    	levels[11].addPortal(new Portal(1050,250,200,50,1475,750));
+    	levels[11].addPortal(new Portal(350,250,200,50,800,750,0));
+    	levels[11].addPortal(new Portal(700,250,200,50,1150,750,0));
+    	levels[11].addPortal(new Portal(1050,250,200,50,1475,750,0));
+    	
+    	levels[12].addWall(new Wall(250, 150, 50, 800));
+    	levels[12].addWall(new Wall(250, 900, 1400, 50));
+    	levels[12].addWall(new Wall(1600, 150, 50, 800));
+    	levels[12].addWall(new Wall(250, 150, 1400, 50));
+    	levels[12].addWall(new Wall(450, 200, 50, 200));
+    	levels[12].addWall(new Wall(650, 200, 50, 200));
+    	levels[12].addWall(new Wall(850, 200, 50, 200));
+    	levels[12].addWall(new Wall(1050, 200, 50, 750));
+    	levels[12].addWall(new Wall(1100, 400, 150, 50));
+    	levels[12].addWall(new Wall(1050, 650, 200, 50));
+    	levels[12].addPortal(new Portal(325,225,100,50,1125,800,90));
+    	levels[12].addPortal(new Portal(525,225,100,50,1125,300,90));
+    	levels[12].addPortal(new Portal(725,225,100,50,1125,550,90));
+    	levels[12].addPortal(new Portal(925,225,100,50,675,850,0));
+    	
+    	
     	
         JFrame f = new JFrame("A+ Project");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
