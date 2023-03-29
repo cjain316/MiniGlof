@@ -15,7 +15,8 @@ public class Level {
 	private int timer = 0;
 	
 	private void rampFunction(Ramp ramp) {
-		ball.setVelocity(ball.getVelocity()+0.5);
+		if (ball.getVy() < 0) ball.setVelocity(ball.getVelocity()+0.5);
+		if (ball.getVy() >= 0) ball.setVelocity(ball.getVelocity()+0.5);
 		ball.setVy(ball.getVy()+0.07);
 	}
 
