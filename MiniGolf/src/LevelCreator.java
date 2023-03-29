@@ -32,7 +32,7 @@ public class LevelCreator extends JPanel implements KeyListener, ActionListener,
     private Font font = new Font(Font.DIALOG_INPUT, Font.BOLD, 32);
     private ArrayList<String> controlbuffer = new ArrayList<String>();
     private Point pos1,pos2;
-    private int levelnumber = 11;
+    private int levelnumber = 13;
     private Level[] levels = {
     		new Level(100,100,200,200),
  // }: sad

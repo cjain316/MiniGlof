@@ -6,12 +6,18 @@ import java.util.ArrayList;
 public class Level {
 	private ArrayList<Wall> walls = new ArrayList<Wall>();
 	private ArrayList<Portal> portals = new ArrayList<Portal>();
+	private ArrayList<Ramp> ramps = new ArrayList<Ramp>();
 	private int startingx,startingy;
 	private int holex,holey;
 	private boolean complete;
 	Ball ball;
 	Hole hole;
 	private int timer = 0;
+	
+	private void rampFunction(Ramp ramp) {
+		ball.setVelocity(ball.getVelocity()+0.5);
+		ball.setVy(ball.getVy()+0.07);
+	}
 
 	public void paint(Graphics g) {
 		//Timer decrement
@@ -20,6 +26,7 @@ public class Level {
 		//painting walls
 		for (int i = 0; i < walls.size();i++) {walls.get(i).paint(g);}
 		for (int i = 0; i < portals.size();i++) {portals.get(i).paint(g);}
+		for (int i = 0; i < ramps.size();i++) {ramps.get(i).paint(g);}
 		hole.paint(g);
 		
 		//Collision detection
@@ -36,6 +43,19 @@ public class Level {
 					ball.setVx(1);
 				}
 			}
+		}
+		boolean goofyahh = false;
+		for (int i = 0; i < ramps.size();i++) {
+			if (ball.getHitbox().intersects(ramps.get(i).getHitbox())) {
+				goofyahh = true;
+				rampFunction(ramps.get(i));
+			}
+		}
+		if (!goofyahh) {
+			//if (ball.getVelocity() > 0) {
+				//ball.setVelocity(ball.getVelocity()*-1);
+				//ball.recalculate(ball.getVx(),ball.getVy());
+			//}
 		}
 		
 		for (int i = 0; i < walls.size();i++) {
@@ -82,6 +102,9 @@ public class Level {
 	
 	public void addWall(Wall w) {
 		walls.add(w);
+	}
+	public void addRamp(Ramp r) {
+		ramps.add(r);
 	}
 	
 	public void addPortal(Portal p) {

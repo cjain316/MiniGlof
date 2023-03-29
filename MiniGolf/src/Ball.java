@@ -87,7 +87,7 @@ public class Ball {
         }
         
         //update velocity
-    	if (velocity > 0) {velocity-=0.5;}
+    	if (velocity > 0) {velocity-=0.5;}if (velocity > 0) {velocity-=0.5;}
         x += (slopex*velocity*10)/10;
         y += (slopey*velocity*10)/10;
         
