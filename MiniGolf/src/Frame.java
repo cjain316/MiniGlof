@@ -73,7 +73,8 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
 		}
         
         
-        if (levels[level].getBall().getVelocity() == 0) {levels[level].getBall().setAngle(calculateAngle(levels[level].getBall(),point));}
+		
+        if (levels[level].getBall().getVelocity() == 0 && !levels[level].rampcolliding()) {levels[level].getBall().setAngle(calculateAngle(levels[level].getBall(),point));}
         if (levels[level].getCompleted() && !(level+1 >= levels.length)) {level++; strokes += holestrokes; holestrokes = 0;}
         g.setColor(new Color(97, 186, 121));
         g.fillRect(0, 0, 1920, 1080);
@@ -296,7 +297,12 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     	levels[13].addWall(new Wall(300, 350, 1300, 50));
     	levels[13].addWall(new Wall(300, 350, 50, 400));
     	levels[13].addWall(new Wall(300, 700, 1300, 50));
-    	levels[13].addRamp(new Ramp(1600,500,200,200,0));
+    	levels[13].addRamp(new Ramp(1600,450,200,200,270));
+    	levels[13].addRamp(new Ramp(1350,750,200,200,0));
+    	levels[13].addRamp(new Ramp(100,450,200,200,270));
+    	levels[13].addRamp(new Ramp(350,750,200,200,0));
+    	levels[13].addRamp(new Ramp(1350,150,200,200,180));
+    	levels[13].addRamp(new Ramp(350,150,200,200,180));
     	
     	
     	
