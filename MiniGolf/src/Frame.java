@@ -297,10 +297,10 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     	levels[13].addWall(new Wall(300, 350, 1300, 50));
     	levels[13].addWall(new Wall(300, 350, 50, 400));
     	levels[13].addWall(new Wall(300, 700, 1300, 50));
-    	levels[13].addRamp(new Ramp(1600,450,200,200,270));
-    	levels[13].addRamp(new Ramp(1350,750,200,200,0));
-    	levels[13].addRamp(new Ramp(100,450,200,200,270));
-    	levels[13].addRamp(new Ramp(350,750,200,200,0));
+    	levels[13].addRamp(new Ramp(1600,450,200,200,90));
+    	levels[13].addRamp(new Ramp(1350,750,200,200,180));
+    	levels[13].addRamp(new Ramp(100,450,200,200,90));
+    	levels[13].addRamp(new Ramp(350,750,200,200,180));
     	levels[13].addRamp(new Ramp(1350,150,200,200,180));
     	levels[13].addRamp(new Ramp(350,150,200,200,180));
     	
