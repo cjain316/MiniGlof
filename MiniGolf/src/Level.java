@@ -25,20 +25,20 @@ public class Level {
 	
 	private void rampFunction(Ramp ramp) {
 		if (ramp.getDirection() == 270) {
-			if (ball.getVy() < 0) ball.setVelocity(ball.getVelocity()+0.1);
-			if (ball.getVy() >= 0) ball.setVelocity(ball.getVelocity()+1);
+			if (ball.getVy() < 0) ball.setVelocity(ball.getVelocity()-0.5);
+			if (ball.getVy() >= 0) ball.setVelocity(ball.getVelocity()+0.5);
 			ball.setVy(ball.getVy()+0.07);
 		} if (ramp.getDirection() == 0) {
-			if (ball.getVx() < 0) ball.setVelocity(ball.getVelocity()+0.1);
-			if (ball.getVx() >= 0) ball.setVelocity(ball.getVelocity()+1);
+			if (ball.getVx() < 0) ball.setVelocity(ball.getVelocity()+0.5);
+			if (ball.getVx() >= 0) ball.setVelocity(ball.getVelocity()-0.5);
 			ball.setVx(ball.getVx()+0.07);
 		} if (ramp.getDirection() == 180) {
-			if (ball.getVx() < 0) ball.setVelocity(ball.getVelocity()+0.1);
-			if (ball.getVx() >= 0) ball.setVelocity(ball.getVelocity()+1);
+			if (ball.getVx() < 0) ball.setVelocity(ball.getVelocity()+0.5);
+			if (ball.getVx() >= 0) ball.setVelocity(ball.getVelocity()-0.5);
 			ball.setVx(ball.getVx()-0.07);
 		} if (ramp.getDirection() == 90) {
-			if (ball.getVy() < 0) ball.setVelocity(ball.getVelocity()+0.1);
-			if (ball.getVy() >= 0) ball.setVelocity(ball.getVelocity()+1);
+			if (ball.getVy() < 0) ball.setVelocity(ball.getVelocity()+0.5);
+			if (ball.getVy() >= 0) ball.setVelocity(ball.getVelocity()+0.5);
 			ball.setVy(ball.getVy()-0.07);
 		}
 	}
