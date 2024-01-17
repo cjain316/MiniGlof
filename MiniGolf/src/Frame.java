@@ -28,7 +28,7 @@ public class Frame extends JPanel implements KeyListener, ActionListener, MouseL
     private Image Sprite = null;
     private int tempvel = 0;
     private AffineTransform tx;
-    private int level = 13;
+    private int level = 0;
     private Font font = new Font(Font.DIALOG_INPUT, Font.BOLD, 32);
     private ArrayList<Integer> controlbuffer = new ArrayList<Integer>();
     private Level[] levels = {
